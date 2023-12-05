@@ -112,7 +112,10 @@ export default function Single({ data }) {
   const { text, pt, lastmod, wordCount, next, prev } = data
   const ma = matter(text)
   const { aid, zid, title, author } = ma.data
-  const content = ma.content
+  const content = ma.content.replace(
+    /!\[(.*)\]\(\/(.*)\)/g,
+    "![$1](https://cdn.jsdelivr.net/gh/Kassaking7/NovelNestDB@main/$2)"
+  )
   const html = markdown(content)
 
   return (
